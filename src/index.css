@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Gallery Access Platform Design System */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+
+    /* Primary Blue: #2D6CDF */
+    --primary: 217 72% 53%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary: #F7F7F8 */
+    --secondary: 240 5% 97%;
+    --secondary-foreground: 0 0% 0%;
+
+    /* Muted: #6B7280 */
+    --muted: 240 5% 97%;
+    --muted-foreground: 220 9% 46%;
+
+    /* Accent/Selection Green: #24A148 */
+    --accent: 142 64% 39%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Destructive/Danger: #DC2626 */
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Border: #E4E4E7 */
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 217 72% 53%;
+
+    --radius: 0.5rem;
+
+    /* Custom design tokens */
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    
+    /* Shadows */
+    --shadow-soft: 0px 2px 6px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0px 4px 12px rgba(0, 0, 0, 0.14);
+    --shadow-elevated: 0 8px 32px -8px rgba(0, 0, 0, 0.16);
+    
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.2s ease;
+
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 24px;
+    --spacing-2xl: 32px;
+
+    /* Radii */
+    --radius-card: 8px;
+    --radius-button: 6px;
+    --radius-tag: 4px;
+
+    /* Badge colors - Hold (Yellow/Amber) */
+    --badge-hold-bg: 48 96% 89%;
+    --badge-hold-text: 28 80% 31%;
+    --badge-hold-border: 45 93% 61%;
+    
+    /* Badge colors - Your Hold (Blue) */
+    --badge-your-hold-bg: 214 95% 93%;
+    --badge-your-hold-text: 226 71% 40%;
+    --badge-your-hold-border: 217 72% 53%;
+    
+    /* Badge colors - On Loan (Purple) */
+    --badge-on-loan-bg: 270 95% 95%;
+    --badge-on-loan-text: 271 81% 40%;
+    --badge-on-loan-border: 271 91% 65%;
+    
+    /* Badge colors - Selected (Green) */
+    --badge-selected-bg: 142 76% 97%;
+    --badge-selected-text: 143 64% 24%;
+    --badge-selected-border: 142 64% 39%;
+
+    /* Warning: #F4C542 */
+    --warning: 45 90% 61%;
+    --warning-foreground: 28 80% 31%;
+
+    /* Success */
+    --success: 142 64% 39%;
+    --success-foreground: 0 0% 100%;
+  }
+
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 217 72% 53%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 4% 16%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 240 4% 16%;
+    --muted-foreground: 240 5% 65%;
+
+    --accent: 142 64% 39%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 4% 16%;
+    --input: 240 4% 16%;
+    --ring: 217 72% 53%;
+
+    /* Badge colors - Hold (Yellow/Amber) - Dark mode */
+    --badge-hold-bg: 45 80% 20%;
+    --badge-hold-text: 48 96% 89%;
+    --badge-hold-border: 45 93% 50%;
+    
+    /* Badge colors - Your Hold (Blue) - Dark mode */
+    --badge-your-hold-bg: 217 50% 20%;
+    --badge-your-hold-text: 214 95% 80%;
+    --badge-your-hold-border: 217 72% 53%;
+    
+    /* Badge colors - On Loan (Purple) - Dark mode */
+    --badge-on-loan-bg: 271 50% 20%;
+    --badge-on-loan-text: 270 95% 85%;
+    --badge-on-loan-border: 271 91% 50%;
+    
+    /* Badge colors - Selected (Green) - Dark mode */
+    --badge-selected-bg: 142 50% 15%;
+    --badge-selected-text: 142 76% 85%;
+    --badge-selected-border: 142 64% 39%;
+
+    --warning: 45 90% 50%;
+    --warning-foreground: 28 80% 10%;
+
+    --success: 142 64% 39%;
+    --success-foreground: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-body);
+    @apply font-semibold;
+  }
+  
+  h1 {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+  
+  h2 {
+    font-size: 24px;
+    line-height: 1.3;
+  }
+  
+  h3 {
+    font-size: 22px;
+    line-height: 1.3;
+  }
+  
+  h4 {
+    font-size: 20px;
+    line-height: 1.4;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  small {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  button {
+    font-size: 15px;
+    font-family: inherit;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .shadow-medium {
+    box-shadow: var(--shadow-medium);
+  }
+  
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+  
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  
+  .transition-fast {
+    transition: var(--transition-fast);
+  }
+
+  /* Max width container for gallery layouts */
+  .gallery-container {
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--spacing-xl);
+    padding-right: var(--spacing-xl);
+  }
+}
+
+@layer components {
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out forwards;
+  }
+  
+  .animate-slide-in-right {
+    animation: slideInRight 0.3s ease-out forwards;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

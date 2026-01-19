@@ -1,0 +1,16 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      // Allow read (get and list) access to all authenticated users.
+      // NOTE: This includes anonymous users, which is required for:
+      // 1. Artwork previews on the login page.
+      // 2. Initial loading of artwork cards before full gallery login.
+      allow read: if request.auth != null;
+      
+      // Only allow write access via Firebase Console (Admin SDK).
+      // Standard users and anonymous users cannot upload or delete.
+      allow write: if false; 
+    }
+  }
+}

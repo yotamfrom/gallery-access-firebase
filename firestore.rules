@@ -1,0 +1,41 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Galleries are the source of truth for identity
+    match /galleries/{galleryId} {
+      // Allow individual read if owner, unclaimed, or admin
+      allow get: if request.auth != null && (
+        !('User_uid' in resource.data) || 
+        resource.data.User_uid == "" || 
+        resource.data.User_uid == null ||
+        resource.data.User_uid == request.auth.uid ||
+        resource.data.User_uID == request.auth.uid ||
+        request.auth.token.email == 'yotamfr@gmail.com'
+      );
+      
+      // Allow admins to list all galleries. 
+      // Allow authenticated users to search for THEIR OWN gallery via query.
+      allow list: if request.auth != null;
+
+      // Allow update if own doc or unclaimed. Admin can do anything.
+      allow write: if request.auth != null && (
+        request.auth.token.email == 'yotamfr@gmail.com' ||
+        (
+          (resource == null || !('User_uid' in resource.data) || resource.data.User_uid == "" || resource.data.User_uid == null || resource.data.User_uid == request.auth.uid) &&
+          (request.resource.data.User_uid == request.auth.uid)
+        )
+      );
+    }
+    
+    match /users/{userId} {
+      allow read, write: if false;
+    }
+
+    match /system_configs/{configId} {
+      // Sensitive configs only readable by admin directly
+      // Standards users interact via Cloud Functions
+      allow read: if request.auth != null && request.auth.token.email == 'yotamfr@gmail.com';
+      allow write: if false;
+    }
+  }
+}

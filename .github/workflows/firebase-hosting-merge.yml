@@ -1,0 +1,37 @@
+name: Deploy to Firebase Hosting on merge
+'on':
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Diagnostic - Wide Secret Search
+        run: |
+          echo "Checking various secret names..."
+          if [ -n "$V1" ]; then echo "VITE_FIREBASE_API_KEY found (len: ${#V1})"; else echo "VITE_FIREBASE_API_KEY: NOT FOUND"; fi
+          if [ -n "$V2" ]; then echo "FIREBASE_API_KEY found (len: ${#V2})"; else echo "FIREBASE_API_KEY: NOT FOUND"; fi
+          if [ -n "$V3" ]; then echo "API_KEY found (len: ${#V3})"; else echo "API_KEY: NOT FOUND"; fi
+        env:
+          V1: ${{ secrets.VITE_FIREBASE_API_KEY || vars.VITE_FIREBASE_API_KEY }}
+          V2: ${{ secrets.FIREBASE_API_KEY || vars.FIREBASE_API_KEY }}
+          V3: ${{ secrets.API_KEY || vars.API_KEY }}
+      - run: npm ci && npm run build
+        env:
+
+          VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY || vars.VITE_FIREBASE_API_KEY }}
+          VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN || vars.VITE_FIREBASE_AUTH_DOMAIN }}
+          VITE_FIREBASE_PROJECT_ID: ${{ secrets.VITE_FIREBASE_PROJECT_ID || vars.VITE_FIREBASE_PROJECT_ID }}
+          VITE_FIREBASE_STORAGE_BUCKET: ${{ secrets.VITE_FIREBASE_STORAGE_BUCKET || vars.VITE_FIREBASE_STORAGE_BUCKET }}
+          VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID || vars.VITE_FIREBASE_MESSAGING_SENDER_ID }}
+          VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID || vars.VITE_FIREBASE_APP_ID }}
+          VITE_FIREBASE_MEASUREMENT_ID: ${{ secrets.VITE_FIREBASE_MEASUREMENT_ID || vars.VITE_FIREBASE_MEASUREMENT_ID }}
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GALLERY_ACCESS_LOGIN }}'
+          channelId: live
+          projectId: gallery-access-login

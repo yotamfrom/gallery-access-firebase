@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "gallery-access-firebase"
+  },
+  "targets": {
+    "gallery-access-firebase": {
+      "hosting": {
+        "main": [
+          "gallery-access-firebase"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

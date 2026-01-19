@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery Access</title>
+  <meta name="description" content="Gallery Access Application" />
+  <meta name="author" content="Sigalit Landau Studio" />
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://apis.google.com https://www.gstatic.com https://*.firebaseapp.com https://*.googleapis.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' blob: data: https://*.googleusercontent.com https://*.googleapis.com https://*.firebaseapp.com https://*.filemaker-cloud.com;
+    connect-src 'self' https://hpwscwgaacpkhvdsflhm.supabase.co wss://hpwscwgaacpkhvdsflhm.supabase.co https://quoptcwjwkbgtcscxazv.supabase.co wss://quoptcwjwkbgtcscxazv.supabase.co https://*.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://*.firebaseio.com https://*.firebaseapp.com wss://*.firebase.com https://*.cloudfunctions.net;
+    frame-src https://*.firebaseapp.com https://*.firebase.com;
+  " />
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>
