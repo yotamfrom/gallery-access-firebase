@@ -339,7 +339,7 @@ export default function LoginPage() {
             </div>
             <div className="text-center lg:text-left space-y-1">
               <h1 className="text-2xl font-bold tracking-tight text-foreground">Sigalit Landau Studio</h1>
-              <p className="text-base text-muted-foreground">Gallery Access Portal</p>
+              <p className="text-base text-muted-foreground">Gallery Access Dashboard</p>
             </div>
           </div>
 
